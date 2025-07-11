@@ -1,69 +1,88 @@
 package utilities;
 
-/**
-* DictionaryADT.java
-*
-* @author Jessie Tang, Kwan Ting Wong
-* @version major.minor revision number starting at 1.0
-* 
-* Class Definition: This interface represents the public contract for the
-* implementation of Dictionary for the DictionaryADT Lab. 
-*/
-
-public interface DictionaryADT<K,V>
-{
-/**
- * Inserts a new key-value pair into the dictionary.
- *
- * Precondition: The dictionary has been properly initialized, and key/value are not null.
- *
- * Postcondition: A new key-value pair is added if the key does not already exist.
- *
- * @param key the key to insert
- * @param value the value to associate with the key
- * @return true if the pair is inserted successfully, false if the key already exists
- * @throws NullPointerException if key or value is null
- */
-public boolean insert(K key, V value);
+import exceptions.DuplicateKeyException;
 
 /**
- * Removes the key-value pair from the dictionary using the specified key.
+ * DictionaryADT.java
  *
- * Precondition: The dictionary has been properly initialized.
- *
- * Postcondition: The key-value pair is removed if it exists.
- *
- * @param key the key to remove
- * @return true if the key-value pair was removed, false if the key was not found
- * @throws NullPointerException if key is null
+ * @author kitty
+ * @version 1.1
+ * 
+ *          Class Definition: This interface represents the public contract for
+ *          the
+ *          implementation of Dictionary for the DictionaryADT Lab. This data
+ *          type
+ *          will store data in (key, value) pairs and keys must be unique.
  */
-public boolean remove(K key);
+
+public interface DictionaryADT<K, V> {
     /**
-     * Updates the value associated with the given key.
+     * Constructor method to create a new Dictionary object.
      * 
-     * Precondition: The dictionary has been properly initialized, and the value is not null and is passed as argument.
+     * Precondition: None.
      * 
-     * Postcondition: The value with the corresponding key is successfully updated in the Dictionary. 
+     * Postcondition: A dictionary object is created and its size is
+     * initialized to the value in the argument, or a default of 10.
+     * 
+     * @param size Optional: the size of the new dictionary, default is 10.
+     */
+    public void create(int size);
+
+    /**
+     * Mutator method to insert a new key-value pair into the Dictionary.
+     * 
+     * Precondition: A valid dictionary object exists and non-null values
+     * are passed as arguments.
+     * 
+     * Postcondition: The new key-value pair is added to the Dictionary.
+     * 
+     * @param K key
+     * @param V value
+     * @return true if key-value pair has been added successfully.
+     * 
+     * @throws DuplicateKeyException is thrown if key already exist.
+     */
+    public boolean insert(K key, V value) throws DuplicateKeyException;
+
+    /**
+     * Mutator method to remove a key-value pair from the Dictionary.
+     * 
+     * Precondition: A valid dictionary object exists and a non-null value
+     * is passed as argument.
+     * 
+     * Postcondition: The key-value pair is deleted from the Dictionary.
+     * 
+     * @param K key
+     * @return the value of the key removed, null if key does not exist.
+     */
+    public V remove(K key);
+
+    /**
+     * Mutator method to update a key-value pair from the Dictionary.
+     * 
+     * Precondition: A valid dictionary object exists and a non-null value
+     * is passed as argument.
+     * 
+     * Postcondition: The value of the key is changed in the Dictionary.
      * 
      * @param K key
      * @param V the new value
-     * @return true if the system changes the key-value pair successfully,
-     * false if the key does not exist
-     * 
-     * @throws NullPointerException if key or value is null
+     * @return true if key-value pair has been changed successfully, or
+     *         false if key does not exist.
      */
-    public boolean update( K key, V value );
+    public boolean update(K key, V value);
 
     /**
-     * Retrieves the value associated with the specified key.
+     * Accessor method to retrieve the value of a key from the Dictionary.
      * 
-     * Precondition: The dictionary has been properly initialized, and the value is not null and is passed as argument.
+     * Precondition: A valid dictionary object exists and a non-null value
+     * is passed as argument.
      * 
-     * Postcondition: The value with the corresponding key is return from the Dictionary. 
+     * Postcondition: The value of the key is returned from the Dictionary.
      * 
-     * @param K key the key to loop up
-     * @return the value of the corresponding, or null if the key does not exist. 
+     * @param K key
+     * @return the value of the key, null if key does not exist.
      */
-    public V lookup( K key );
+    public V lookup(K key);
 
 }
