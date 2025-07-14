@@ -21,13 +21,24 @@ public class Dictionary<K, V> implements DictionaryADT<K, V> {
 
 	@Override
 	public void create(int size) {
-		// TODO: implement
+		if (size < 0) {
+			throw new IllegalArgumentException("Size must be non-negative");
+		}
+		keys = new ArrayList<>(size);
+		values = new ArrayList<>(size);
 	}
 
 	@Override
 	public boolean insert(K key, V value) throws DuplicateKeyException {
-		// TODO: implement
-		return false;
+		if (key == null || value == null) {
+			throw new IllegalArgumentException("Key or value is null");
+		}
+		if (keys.contains(key)) {
+			throw new DuplicateKeyException("Duplicate key: " + key);
+		}
+		keys.add(key);
+		values.add(value);
+		return true;
 	}
 
 	@Override
