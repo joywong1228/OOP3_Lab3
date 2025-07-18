@@ -43,19 +43,30 @@ public class Dictionary<K, V> implements DictionaryADT<K, V> {
 
 	@Override
 	public V remove(K key) {
-		// TODO: implement
-		return null;
+		int index = keys.indexOf(key);
+		if (index == -1) {
+			return null;
+		}
+		keys.remove(index);
+		return values.remove(index);
 	}
 
 	@Override
 	public boolean update(K key, V value) {
-		// TODO: implement
-		return false;
+		int index = keys.indexOf(key);
+		if (index == -1) {
+			return false;
+		}
+		values.set(index, value);
+		return true;
 	}
 
 	@Override
 	public V lookup(K key) {
-		// TODO: implement
-		return null;
+		int index = keys.indexOf(key);
+		if (index == -1) {
+			return null;
+		}
+		return values.get(index);
 	}
 }
